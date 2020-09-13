@@ -3,6 +3,7 @@ const chai = require("chai");
 const Fr = require("ffjavascript").bn128.Fr;
 
 const smt = require("circomlib").smt;
+// const smt = require("../../iden3/circomlib/src/smt.js");
 
 const assert = chai.assert;
 
@@ -18,24 +19,24 @@ describe("SMT javascript testvectors", function () {
         let k = Fr.e(1);
         let v = Fr.e(2);
         await tree.insert(k,v);
-        console.log(tree.root);
+        console.log("insert(1,2)", tree.root);
 
         k = Fr.e(33);
         v = Fr.e(44);
         await tree.insert(k,v);
-        console.log(tree.root);
+        console.log("insert(33, 44)", tree.root);
 
         k = Fr.e(1234);
         v = Fr.e(9876);
         await tree.insert(k,v);
-        console.log(tree.root);
+        console.log("insert(1234, 9876)", tree.root);
 
         await tree.delete(Fr.e(33));
-        console.log(tree.root);
+        console.log("delete(33)", tree.root);
 
         await tree.delete(Fr.e(1234));
         await tree.delete(Fr.e(1));
-        console.log(tree.root);
+        console.log("delete(1234 & 1)", tree.root);
 
         assert(Fr.isZero(tree.root));
     });
@@ -50,7 +51,7 @@ describe("SMT javascript testvectors", function () {
         k = Fr.e(2);
         v = Fr.e(2);
         await tree.insert(k,v);
-        console.log(tree.root);
+        console.log("insert(2,2)", tree.root);
 
         console.log("TestDelete3", tree.root);
         await tree.delete(Fr.e(1));
@@ -75,7 +76,8 @@ describe("SMT javascript testvectors", function () {
         console.log(tree.root);
 
         console.log("TestDelete4", tree.root);
-        await tree.delete(Fr.e(1));
+        let res = await tree.delete(Fr.e(1));
+        console.log("TestDelete4 res", res);
         console.log("TestDelete4", tree.root);
     });
     it("TestDelete5", async () => {

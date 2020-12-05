@@ -1,7 +1,5 @@
 const chai = require("chai");
 
-const Fr = require("ffjavascript").bn128.Fr;
-
 const poseidon = require("../../iden3/circomlib/src/poseidon.js");
 
 const assert = chai.assert;

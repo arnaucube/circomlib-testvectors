@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "cd node_modules/circomlib && npm install && ../ffjavascript && npm install"
   },
   "author": "",
   "license": "GPLv3.0",
   "dependencies": {
-    "circomlib": "^0.2.3",
-    "ffjavascript": "^0.1.3"
+    "circomlib": "git+https://github.com/iden3/circomlib",
+    "ffjavascript": "git+https://github.com/iden3/ffjavascript"
   },
   "devDependencies": {
     "mocha": "^7.1.1"

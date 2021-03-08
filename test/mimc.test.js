@@ -2,11 +2,17 @@ const chai = require("chai");
 
 const Scalar = require("ffjavascript").Scalar;
 
-const mimc = require("../../iden3/circomlib/src/mimc7.js");
+const mimc = require("circomlib").mimc7;
 
 const assert = chai.assert;
 
 const SEED = "mimc";
+
+function testvector(method, x, k) {
+    console.log(method);
+    console.log("input:", x, k);
+    console.log("output:", method(x, k));
+}
 
 describe("MiMC7 javascript testvectors", function () {
     this.timeout(100000);
@@ -17,14 +23,9 @@ describe("MiMC7 javascript testvectors", function () {
         console.log(cts[1]);
     });
     it("MiMC7", async () => {
-        let res = mimc.hash(1, 2, 91);
-        console.log("mimc.hash(1,2,91)", res);
-
-        res = mimc.multiHash([Scalar.e(1), Scalar.e(2), Scalar.e(3)], Scalar.e(0));
-        console.log("mimc.multiHash([1,2,3], 0)", res);
-
-        res = mimc.hash(12, 45, 91);
-        console.log("mimc.hash(12,45,91)", res);
+        testvector(mimc.hash, 1, 2);
+        testvector(mimc.multiHash,[Scalar.e(1), Scalar.e(2), Scalar.e(3)], Scalar.e(0));
+        testvector(mimc.hash, 12, 45);
     });
 
 });

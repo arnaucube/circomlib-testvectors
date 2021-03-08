@@ -1,34 +1,27 @@
 const chai = require("chai");
 
-const poseidon = require("../../iden3/circomlib/src/poseidon.js");
+const poseidon = require("circomlib").poseidon;
 
 const assert = chai.assert;
+
+function testvector(method, inputs) {
+    console.log(method);
+    console.log("input:", inputs);
+    console.log("output:", method(inputs));
+}
 
 describe("Poseidon javascript testvectors", function () {
     this.timeout(100000);
     before( async () => {
     });
     it("Poseidon t=6", async () => {
-        let res = poseidon([1]);
-        console.log(res);
-
-        res = poseidon([1,2]);
-        console.log(res);
-
-        res = poseidon([1,2, 0, 0, 0]);
-        console.log(res);
-
-        res = poseidon([1,2, 0, 0, 0, 0]);
-        console.log(res);
-
-        res = poseidon([3,4, 0, 0, 0]);
-        console.log(res);
-        res = poseidon([3,4, 0, 0, 0, 0]);
-        console.log(res);
-
-        res = poseidon([1,2,3,4,5,6]);
-        console.log(res);
-
+        testvector(poseidon, [1]);
+        testvector(poseidon, [1,2]);
+        testvector(poseidon, [1,2,0,0,0]);
+        testvector(poseidon, [1,2,0,0,0,0]);
+        testvector(poseidon, [3,4,0,0,0,]);
+        testvector(poseidon, [3,4,0,0,0,0]);
+        testvector(poseidon, [1,2,3,4,5,6]);
     });
 
 });

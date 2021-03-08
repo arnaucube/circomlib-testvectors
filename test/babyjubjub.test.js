@@ -10,7 +10,6 @@ const babyjub = require("circomlib").babyJub;
 const assert = chai.assert;
 
 describe("BabyJubJub EDDSA javascript testvectors", function () {
-
     it("BabyJubJub Keys test", async () => {
 	let sk = Buffer.from("0001020304050607080900010203040506070809000102030405060708090001", "hex");
 	let pk = eddsa.prv2pub(sk);
@@ -29,7 +28,7 @@ describe("BabyJubJub EDDSA javascript testvectors", function () {
         assert.equal(signature.R8[1].toString(),
             "15383486972088797283337779941324724402501462225528836549661220478783371668959");
         assert.equal(signature.S.toString(),
-            "1398758333392199195742243841591064350253744445503462896781493968760929513778");
+            "1672775540645840396591609181675628451599263765380031905495115170613215233181");
 
         const pkPacked = babyjub.packPoint(pk);
 	assert.equal(pkPacked.toString("hex"), "c433f7a696b7aa3a5224efb3993baf0ccd9e92eecee0c29a3f6c8208a9e81d9e");
